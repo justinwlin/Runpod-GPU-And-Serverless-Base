@@ -1,0 +1,6 @@
+# Replace this with your own if different
+FROM [YOUR OWN REPO INSERT HERE]
+
+WORKDIR /app
+
+COPY handler.py .
