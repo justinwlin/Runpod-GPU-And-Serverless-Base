@@ -9,66 +9,12 @@
         "documentation": {}
     },
     {
-        "label": "openllm",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "openllm",
-        "description": "openllm",
-        "detail": "openllm",
-        "documentation": {}
-    },
-    {
-        "label": "runpod",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "runpod",
-        "description": "runpod",
-        "detail": "runpod",
-        "documentation": {}
-    },
-    {
         "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "asyncio",
         "description": "asyncio",
         "detail": "asyncio",
-        "documentation": {}
-    },
-    {
-        "label": "torch",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "torch",
-        "description": "torch",
-        "detail": "torch",
-        "documentation": {}
-    },
-    {
-        "label": "numpy",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "numpy",
-        "description": "numpy",
-        "detail": "numpy",
-        "documentation": {}
-    },
-    {
-        "label": "random",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "random",
-        "description": "random",
-        "detail": "random",
-        "documentation": {}
-    },
-    {
-        "label": "uuid",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "uuid",
-        "description": "uuid",
-        "detail": "uuid",
         "documentation": {}
     },
     {
@@ -112,7 +58,7 @@
         "kind": 2,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "def adjust_concurrency(current_concurrency):\n    return concurrency_modifier\nif mode_to_run in [\"both\", \"serverless\"]:\n    runpod.serverless.start({\n        \"handler\": handler,\n        \"concurrency_modifier\": adjust_concurrency,\n        \"return_aggregate_stream\": True,\n    })\nif mode_to_run == \"pod\":\n    async def main():",
+        "peekOfCode": "def adjust_concurrency(current_concurrency):\n    return concurrency_modifier\nif mode_to_run in [\"both\", \"serverless\"]:\n    # Assuming runpod.serverless.start is correctly implemented elsewhere\n    runpod.serverless.start({\n        \"handler\": handler,\n        \"concurrency_modifier\": adjust_concurrency,\n        \"return_aggregate_stream\": True,\n    })\nif mode_to_run == \"pod\":",
         "detail": "handler",
         "documentation": {}
     },
@@ -121,7 +67,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "model_name = os.getenv(\"MODEL\", \"mistralai/Mistral-7B-Instruct-v0.1\")\nconcurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# LOAD THE MODEL\n# model = loadModelPseudo(model_name)",
+        "peekOfCode": "model_name = os.getenv(\"MODEL\", \"mistralai/Mistral-7B-Instruct-v0.1\")\nconcurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\nasync def handler(event):\n    inputReq = event.get(\"input\", {})",
         "detail": "handler",
         "documentation": {}
     },
@@ -130,7 +76,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "concurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# LOAD THE MODEL\n# model = loadModelPseudo(model_name)\nasync def handler(event):",
+        "peekOfCode": "concurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\nasync def handler(event):\n    inputReq = event.get(\"input\", {})\n    return inputReq",
         "detail": "handler",
         "documentation": {}
     },
@@ -139,7 +85,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "mode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# LOAD THE MODEL\n# model = loadModelPseudo(model_name)\nasync def handler(event):\n    inputReq = event.get(\"input\", {})",
+        "peekOfCode": "mode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\nasync def handler(event):\n    inputReq = event.get(\"input\", {})\n    return inputReq\n# https://docs.runpod.io/serverless/workers/handlers/handler-concurrency",
         "detail": "handler",
         "documentation": {}
     },
@@ -148,7 +94,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "model_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# LOAD THE MODEL\n# model = loadModelPseudo(model_name)\nasync def handler(event):\n    inputReq = event.get(\"input\", {})\n    return inputReq",
+        "peekOfCode": "model_length_default = 25000\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\nasync def handler(event):\n    inputReq = event.get(\"input\", {})\n    return inputReq\n# https://docs.runpod.io/serverless/workers/handlers/handler-concurrency\n# MAKE SURE RUNPOD VERSION PIP IS UPDATED PROPERLY!!!",
         "detail": "handler",
         "documentation": {}
     },

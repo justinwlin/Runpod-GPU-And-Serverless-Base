@@ -1,11 +1,5 @@
 import os
-import openllm
-import runpod
 import asyncio
-import torch
-import numpy as np
-import random
-import uuid
 
 # Use the MODEL environment variable; fallback to a default if not set
 model_name = os.getenv("MODEL", "mistralai/Mistral-7B-Instruct-v0.1")
@@ -18,17 +12,17 @@ print("Concurrency: ", concurrency_modifier)
 print("Mode running: ", mode_to_run)
 print("------- -------------------- -------")
 
-# LOAD THE MODEL
-# model = loadModelPseudo(model_name)
-
 async def handler(event):
     inputReq = event.get("input", {})
     return inputReq
 
+# https://docs.runpod.io/serverless/workers/handlers/handler-concurrency
+# MAKE SURE RUNPOD VERSION PIP IS UPDATED PROPERLY!!!
 def adjust_concurrency(current_concurrency):
     return concurrency_modifier
 
 if mode_to_run in ["both", "serverless"]:
+    # Assuming runpod.serverless.start is correctly implemented elsewhere
     runpod.serverless.start({
         "handler": handler,
         "concurrency_modifier": adjust_concurrency,
@@ -40,7 +34,7 @@ if mode_to_run == "pod":
         prompt = "What is the capital of France?"
         requestObject = {"input": {"prompt": prompt}}
         
-        async for response in handler(requestObject):
-            print(response)
+        response = await handler(requestObject)
+        print(response)
 
     asyncio.run(main())

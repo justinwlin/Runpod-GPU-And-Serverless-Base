@@ -26,22 +26,7 @@ RUN apt-get update --yes --quiet && \
     curl && \
     add-apt-repository --yes ppa:deadsnakes/ppa && \
     apt-get update --yes --quiet && \
-    DEBIAN_FRONTEND=noninteractive apt-get install --yes --quiet --no-install-recommends \
-    python3.11 \
-    python3.11-dev \
-    python3.11-distutils \
-    python3.11-venv \
-    python3.11-lib2to3 \
-    python3.11-gdbm \
-    python3.11-tk && \
-    rm -rf /var/lib/apt/lists/* && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
-    update-alternatives --auto python3
-
-# Install pip manually
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3.11 get-pip.py && \
-    rm get-pip.py
+    DEBIAN_FRONTEND=noninteractive apt-get install --yes --quiet --no-install-recommends
 
 # Create and activate a Python virtual environment
 RUN python3 -m venv /app/venv
