@@ -34,15 +34,14 @@ ENV PATH="/app/venv/bin:$PATH"
 
 # Install Python packages
 # Install Python packages in a single RUN instruction
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir \
+RUN pip install --no-cache-dir \
     OhMyRunPod \
     asyncio \
     requests \
     runpod==1.6.2
 
 # Install requirements.txt
-COPY requirements.txt ./
+COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
     
@@ -53,6 +52,14 @@ RUN rm ../start.sh
 COPY . .
 
 RUN chmod +x start.sh
+
+# WHISPERX Stuff
+RUN pip install --no-cache-dir && \
+    pip install \
+        setuptools-rust==1.8.0 && \
+        whisperx
+
+RUN python preload.py
 
 # depot build -t justinwlin/serverlessllm:1.0 . --push --platform linux/amd64
 CMD ["/app/start.sh"]
