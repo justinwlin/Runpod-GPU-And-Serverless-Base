@@ -53,13 +53,5 @@ COPY . .
 
 RUN chmod +x start.sh
 
-# WHISPERX Stuff
-RUN pip install --no-cache-dir && \
-    pip install \
-        setuptools-rust==1.8.0 && \
-        whisperx
-
-RUN python preload.py
-
 # depot build -t justinwlin/serverlessllm:1.0 . --push --platform linux/amd64
 CMD ["/app/start.sh"]
