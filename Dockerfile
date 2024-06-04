@@ -39,9 +39,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     OhMyRunPod \
     asyncio \
     requests \
-    runpod==1.6.2 \
-    langchain==0.0.259 \
-    "openllm[vllm]"
+    runpod==1.6.2
 
 # Install requirements.txt
 COPY requirements.txt ./
