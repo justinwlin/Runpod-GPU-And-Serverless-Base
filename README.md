@@ -4,7 +4,7 @@
 
 ## Summary
 
-This Docker configuration uses Runpod as a basis so that you can work with both pod and serverless. 
+This Docker configuration uses Runpod as a basis so that you can work with both pod and serverless. The idea is that you can work with your handler.py in a GPU / CPU Pod, validate it all works by just running the `python handler.py` file, and then when you deploy to serverless you should be getting essentially the same exact behavior.
 
 ## Environment Variables
 
