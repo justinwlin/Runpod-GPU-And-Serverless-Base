@@ -4,6 +4,10 @@
 
 [Docker Starter Container](https://hub.docker.com/repository/docker/justinwlin/runpod_pod_and_serverless/general)
 
+# Runpod Images:
+[GPU Pod](https://runpod.io/console/deploy?template=2mjjhmm4vm&ref=wqryvm1m)
+[CPU Pod](https://runpod.io/console/deploy?template=ulep581dbg&ref=wqryvm1m)
+
 ## Summary
 
 This Docker configuration uses Runpod as a basis so that you can work with both pod and serverless. The idea is that you can work with your handler.py in a GPU / CPU Pod, validate it all works by just running the `python handler.py` file, and then when you deploy to serverless you should be getting essentially the same exact behavior.
@@ -25,6 +29,9 @@ Below is a table of the environment variables that can be passed to the Docker c
 
 ## Getting Started
 
+## Scoping out the changes
+I recommend to first spin up a GPU Pod / a CPU pod using the base runpod templates I provide at the top. You can then go to the /app directly, and add stuff to the requirements.txt, manually run `apt-get` commands, and so-on. And test and confirm what dependencies you need to add to the Dockerfile / the requirements.txt. Then you can locally modify the repository, and build your own image and push it to then confirm everything works as you expect.
+
 ## How to customize?
 1. Add to the requirements.txt any python requirements
 2. Modify the Docker container as needed if you need to install other system dependencies so on
@@ -35,7 +42,7 @@ Below is a table of the environment variables that can be passed to the Docker c
 For those using Depot to build and deploy containers, the command structure is slightly different. Here's how you can include the environment variables as build arguments with Depot:
 
 ```bash
-depot build -t yourusername/containername:1.0 .
+depot build -t justinwlin/runpod_gpu_and_serverless_basis:1.0 .
 ```
 
 ### Using Docker CLI
