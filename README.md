@@ -52,19 +52,20 @@ docker build -t yourusername/containername:1.0 . \
 
 # Developer Experience
 
-If you want to deploy on serverless it's super easy! Essentially copy the template but set the environment variable for the MODE to serverless. **Check to make sure the model repository names match up** as I might update template names, or you might be using a different model. Find the right one by refering to Docker which model you want to use. **MAKE SURE TO INCLUDE THE USERNAME/IMAGE:TAG** if you are missing the username, image, or tag it won't work!!:
+If you want to deploy on serverless it's super easy! Essentially copy the template but set the environment variable for the MODE to serverless.
 
 If you end up wanting to change the handler.py I recommend to build using a flag to target the "Dockerfile_Iteration" after you build using the standard "Dockerfile" once. This way you can have the models cached during the docker build process in the base image and only update the handler.py. This way you can avoid the long wait time to "redownload the model" and just update the handler.py.
 
-
-```sh
+```bash
 docker build -f Dockerfile_Iteration -t your_image_name .
 ```
 
-## Overall Methodology:
+## Overall Methodology / Workflow for iterating:
 The methodology is:
-1. Build your first Dockerfile where we preload the model + everything the first time
+1. Build your first Dockerfile where we preload the model + dependencies + everything the first time
 2. Launch a GPU Pod on Runpod and test the handler.py
   -- If everything looks good, just use the same image for serverless and modify the env variable to change how it starts up
   -- If you need to iterate, iterate on Runpod and then copy and paste the handler.py back locally and then build using the Docker_Iteration file, which means you won't have to redownload large dependencies again and instead just keep iterating on handler.py
 3. Once ready, then relaunch back on GPU Pod and Serverless until ready.
+
+Obviously modify the base image, and not just keep using the Docker_Iteration file if there is something fundamental about the base image you should change such as switching out the model, missing a dependency, etc.
