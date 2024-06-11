@@ -25,8 +25,12 @@ Below is a table of the environment variables that can be passed to the Docker c
 
 ## Getting Started
 
+## How to customize?
+1. Add to the requirements.txt any python requirements
+2. Modify the Docker container as needed if you need to install other system dependencies so on
+3. You can modify the start.sh script in order to execution other bash functions as necessary. Make sure that your bash function isn't blocking the eventual sleep infinity call or the python app.py call.
 
-### Using Depot
+### Using Depot to Build
 
 For those using Depot to build and deploy containers, the command structure is slightly different. Here's how you can include the environment variables as build arguments with Depot:
 
@@ -36,6 +40,11 @@ depot build -t yourusername/containername:1.0 .
 
 ### Using Docker CLI
 For traditional Docker builds, you can incorporate the environment variables into your build command like so:
+
+```bash
+docker build -t yourusername/containername:1.0 .
+```
+Or if you want to set different defaults can either set it in the dockerfile or during the build step:
 ```bash
 docker build -t yourusername/containername:1.0 . \
   --build-arg MODE_TO_RUN=pod
@@ -43,16 +52,7 @@ docker build -t yourusername/containername:1.0 . \
 
 # Developer Experience
 
-Start using the container with [GPU_POD](https://runpod.io/gsc?template=pu8uaqw765&ref=wqryvm1m
-) (This is my runpod public URL to the template all ready to go for you.)
-
-![alt text](GPU_POD.png)
-
 If you want to deploy on serverless it's super easy! Essentially copy the template but set the environment variable for the MODE to serverless. **Check to make sure the model repository names match up** as I might update template names, or you might be using a different model. Find the right one by refering to Docker which model you want to use. **MAKE SURE TO INCLUDE THE USERNAME/IMAGE:TAG** if you are missing the username, image, or tag it won't work!!:
-
-For the container size, look at the compressed docker image size on Dockerhub, and I generally like to add another 5GB to 10GB ontop of that. You can play around to see. 
-
-![alt text](SERVERLESS.png)
 
 If you end up wanting to change the handler.py I recommend to build using a flag to target the "Dockerfile_Iteration" after you build using the standard "Dockerfile" once. This way you can have the models cached during the docker build process in the base image and only update the handler.py. This way you can avoid the long wait time to "redownload the model" and just update the handler.py.
 
