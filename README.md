@@ -1,12 +1,8 @@
 # Runpod GPU Pod / Serverless LLM Basis
 
-[Example of a repo using this template](https://github.com/justinwlin/Runpod-OpenLLM-Pod-and-Serverless/tree/main)
-
-[Docker Starter Container](https://hub.docker.com/repository/docker/justinwlin/runpod_pod_and_serverless/general)
+[Docker Starter Container](https://hub.docker.com/repository/docker/justinrunpod/pod-server-base/general)
 
 # Runpod Images:
-[GPU Pod](https://runpod.io/console/deploy?template=2mjjhmm4vm&ref=wqryvm1m)
-[CPU Pod](https://runpod.io/console/deploy?template=ulep581dbg&ref=wqryvm1m)
 
 ## Summary
 

@@ -12,7 +12,7 @@ ARG CONCURRENCY_MODIFIER=1
 ENV CONCURRENCY_MODIFIER=$CONCURRENCY_MODIFIER
 
 # Set up the working directory
-WORKDIR /app
+WORKDIR /workspace
 
 # Install dependencies in a single RUN command to reduce layers
 # Clean up in the same layer to reduce image size
@@ -51,8 +51,12 @@ RUN rm ../start.sh
 # COPY EVERYTHING INTO THE CONTAINER
 COPY . .
 
+# Make sure start.sh is executable
 RUN chmod +x start.sh
 
+# Make sure that the start.sh is in the path
+RUN ls -la /workspace/start.sh
+
 # depot build -t justinrunpod/pod-server-base:1.0 . --push --platform linux/amd64
-CMD ["/app/start.sh"]
+CMD ["/workspace/start.sh"]
 
