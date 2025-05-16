@@ -53,5 +53,6 @@ COPY . .
 
 RUN chmod +x start.sh
 
-# depot build -t justinwlin/serverlessllm:1.0 . --push --platform linux/amd64
+# depot build -t justinrunpod/pod-server-base:1.0 . --push --platform linux/amd64
 CMD ["/app/start.sh"]
+
