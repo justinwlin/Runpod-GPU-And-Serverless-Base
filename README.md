@@ -8,6 +8,8 @@
 
 This Docker configuration uses Runpod as a basis so that you can work with both pod and serverless. The idea is that you can work with your handler.py in a GPU / CPU Pod, validate it all works by just running the `python handler.py` file, and then when you deploy to serverless you should be getting essentially the same exact behavior.
 
+**MAKE SURE TO SET THE ENVIRONNMENT VARIABLE**!!
+
 ## Environment Variables
 
 Below is a table of the environment variables that can be passed to the Docker container. These variables enable customization of the deployment's behavior, offering flexibility for different scenarios.
