@@ -1,5 +1,7 @@
 # Summary
 
+Developing ML/AI applications often requires an Nvidia GPU that developers may not have. This makes working and iterating on such API endpoints difficult, especially on RunPod b/c a common workflow is that people will try to blindly write locally, deploy to serverless, test, try to read logs, and repeat. The iteration time is too slow. The best way is actually to work on RunPod's Pods first, and then move over to Serverless once the Pod is confirmed to work. Since Pods are the "developer environment" that you can  work in browser or SSH and connect with VSCode or some IDE.
+
 RunPod provides two primary services: Pods and Serverless.
 
 Pods are Docker container instances with access to Nvidia GPUs. Using RunPod base templates, they often come with Jupyter Notebooks, SSH ability, so-on, so that developers can easily connect VSCode to a running instance or work straight in the browser.
