@@ -33,12 +33,11 @@ RUN python3 -m venv /app/venv
 ENV PATH="/app/venv/bin:$PATH"
 
 # Install Python packages
-# Install Python packages in a single RUN instruction
 RUN pip install --no-cache-dir \
     OhMyRunPod \
     asyncio \
     requests \
-    runpod==1.6.2
+    runpod
 
 # Install requirements.txt
 COPY requirements.txt ./requirements.txt

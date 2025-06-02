@@ -59,18 +59,15 @@ docker build -t yourusername/containername:1.0 . \
 
 If you want to deploy on serverless it's super easy! Essentially copy the template but set the environment variable for the MODE to serverless.
 
-If you end up wanting to change the handler.py I recommend to build using a flag to target the "Dockerfile_Iteration" after you build using the standard "Dockerfile" once. This way you can have the models cached during the docker build process in the base image and only update the handler.py. This way you can avoid the long wait time to "redownload the model" and just update the handler.py.
-
 ```bash
 docker build -f Dockerfile_Iteration -t your_image_name .
 ```
 
 ## Overall Methodology / Workflow for iterating:
 The methodology is:
-1. Build your first Dockerfile where we preload the model + dependencies + everything the first time
-2. Launch a GPU Pod on Runpod and test the handler.py
-  -- If everything looks good, just use the same image for serverless and modify the env variable to change how it starts up
-  -- If you need to iterate, iterate on Runpod and then copy and paste the handler.py back locally and then build using the Docker_Iteration file, which means you won't have to redownload large dependencies again and instead just keep iterating on handler.py
-3. Once ready, then relaunch back on GPU Pod and Serverless until ready.
-
-Obviously modify the base image, and not just keep using the Docker_Iteration file if there is something fundamental about the base image you should change such as switching out the model, missing a dependency, etc.
+1. Deploy with this repository image to Pod
+2. As you install python packages or system packages write it down
+3. Modify the handler.py until you get it working
+4. Copy the handler.py / your system requirements, plug into an LLM to help it modify the DockerFile / start.sh script to your liking
+5. Push the image, and test on Pod until the behavior is what you expect.
+6. Deploy to serverless by using the same template and setting the ENV variable `MODE_TO_RUN` to "serverless"

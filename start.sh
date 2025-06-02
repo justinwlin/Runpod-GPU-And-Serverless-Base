@@ -78,10 +78,6 @@ case $MODE_TO_RUN in
     serverless)
         call_python_handler
         ;;
-    # both)
-    #     start_jupyter
-    #     call_python_handler
-    #     ;;
     pod)
         # Pod mode implies only starting services without calling handler.py
         start_jupyter
