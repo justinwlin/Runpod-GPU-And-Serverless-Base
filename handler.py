@@ -19,12 +19,6 @@ async def handler(event):
 def adjust_concurrency(current_concurrency):
     return concurrency_modifier
 
-if mode_to_run in ["both", "serverless"]:
-    runpod.serverless.start({
-        "handler": handler,
-        "concurrency_modifier": adjust_concurrency,
-    })
-
 if mode_to_run == "pod":
     async def main():
         prompt = "Hello World"
@@ -33,3 +27,8 @@ if mode_to_run == "pod":
         print(response)
 
     asyncio.run(main())
+else: 
+    runpod.serverless.start({
+        "handler": handler,
+        "concurrency_modifier": adjust_concurrency,
+    })

@@ -2,11 +2,15 @@
 
 [Docker Starter Container](https://hub.docker.com/repository/docker/justinrunpod/pod-server-base/general)
 
+[RunPod template](https://runpod.io/console/deploy?template=kkfdqs5wv3&ref=p1oqnqy1)
+
 # Runpod Images:
 
 ## Summary
 
 This Docker configuration uses Runpod as a basis so that you can work with both pod and serverless. The idea is that you can work with your handler.py in a GPU / CPU Pod, validate it all works by just running the `python handler.py` file, and then when you deploy to serverless you should be getting essentially the same exact behavior.
+
+If you are interested further can read the [more info markdown file](./more_info.md).
 
 **MAKE SURE TO SET THE ENVIRONNMENT VARIABLE**!!
 
@@ -35,33 +39,12 @@ I recommend to first spin up a GPU Pod / a CPU pod using the base runpod templat
 2. Modify the Docker container as needed if you need to install other system dependencies so on
 3. You can modify the start.sh script in order to execution other bash functions as necessary. Make sure that your bash function isn't blocking the eventual sleep infinity call or the python app.py call.
 
-### Using Depot to Build
-
-For those using Depot to build and deploy containers, the command structure is slightly different. Here's how you can include the environment variables as build arguments with Depot:
+### Example Build Command
 
 ```bash
-depot build -t justinwlin/runpod_gpu_and_serverless_basis:1.0 .
+docker build -t docker.io/justinrunpod/pod-server-base:1.0 .
 ```
 
-### Using Docker CLI
-For traditional Docker builds, you can incorporate the environment variables into your build command like so:
-
-```bash
-docker build -t yourusername/containername:1.0 .
-```
-Or if you want to set different defaults can either set it in the dockerfile or during the build step:
-```bash
-docker build -t yourusername/containername:1.0 . \
-  --build-arg MODE_TO_RUN=pod
-```
-
-# Developer Experience
-
-If you want to deploy on serverless it's super easy! Essentially copy the template but set the environment variable for the MODE to serverless.
-
-```bash
-docker build -f Dockerfile_Iteration -t your_image_name .
-```
 
 ## Overall Methodology / Workflow for iterating:
 The methodology is:
