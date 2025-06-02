@@ -18,7 +18,7 @@ So a recommended workflow is:
 3. Iterate by just running the `python handler.py` function until you get the result you want.
 4. Once you are happy, copy the `handler.py` that you have, take the requirements, and add it to the DockerFile and start.sh script.
     - Tip: You can use ChatGPT/Claude or tools such as Cursor,  to help you add the additional dependencies.
-5. Rebuild the Dockerfile, push to pod, test manually to make sure works. Then you can deploy to serverless by just making sure you set the environment variable `MODE_TO_RUN` to `serverless`. **Make sure not to forget this step**, otherwise no handler will be defined when the serverless environment executes meaning the worker will just hang.
+5. Rebuild the Dockerfile, push the image, spin up a new pod with the updated image, test manually to make sure works. Then you can deploy to serverless by just making sure you set the environment variable `MODE_TO_RUN` to `serverless`. **Make sure not to forget this step**, otherwise no handler will be defined when the serverless environment executes meaning the worker will just hang.
 
 
 ## Example handler.py
