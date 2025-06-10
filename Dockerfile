@@ -46,7 +46,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 RUN rm ../start.sh
 
 # COPY EVERYTHING INTO THE CONTAINER
-COPY . .
+COPY handler.py $WORKSPACE_DIR/handler.py
+COPY start.sh $WORKSPACE_DIR/start.sh
 
 # Make sure start.sh is executable
 RUN chmod +x start.sh
