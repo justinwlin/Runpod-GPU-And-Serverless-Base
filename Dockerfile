@@ -1,4 +1,4 @@
-# Use an official and specific version tag if possible, instead of 'latest'
+# Use an official RunPod base image
 FROM runpod/pytorch:2.0.1-py3.10-cuda11.8.0-devel-ubuntu22.04
 
 # Environment variables
@@ -8,11 +8,10 @@ ENV PYTHONUNBUFFERED=1
 ARG MODE_TO_RUN=pod
 ENV MODE_TO_RUN=$MODE_TO_RUN
 
-ARG CONCURRENCY_MODIFIER=1
-ENV CONCURRENCY_MODIFIER=$CONCURRENCY_MODIFIER
-
 # Set up the working directory
-WORKDIR /workspace
+ARG WORKSPACE_DIR=/app
+ENV WORKSPACE_DIR=${WORKSPACE_DIR}
+WORKDIR $WORKSPACE_DIR
 
 # Install dependencies in a single RUN command to reduce layers
 # Clean up in the same layer to reduce image size
@@ -34,7 +33,6 @@ ENV PATH="/app/venv/bin:$PATH"
 
 # Install Python packages
 RUN pip install --no-cache-dir \
-    OhMyRunPod \
     asyncio \
     requests \
     runpod
@@ -54,8 +52,8 @@ COPY . .
 RUN chmod +x start.sh
 
 # Make sure that the start.sh is in the path
-RUN ls -la /workspace/start.sh
+RUN ls -la $WORKSPACE_DIR/start.sh
 
 # depot build -t justinrunpod/pod-server-base:1.0 . --push --platform linux/amd64
-CMD ["/workspace/start.sh"]
+CMD ["$WORKSPACE_DIR/start.sh"]
 

@@ -1,9 +1,8 @@
 #!/bin/bash
 set -e  # Exit the script if any statement returns a non-true return value
 
-# ---------------------------------------------------------------------------- #
-#                          Function Definitions                                #
-# ---------------------------------------------------------------------------- #
+# Set workspace directory from env or default
+WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace}"
 
 # Start nginx service
 start_nginx() {
@@ -51,16 +50,16 @@ export_env_vars() {
 # Start jupyter lab
 start_jupyter() {
     echo "Starting Jupyter Lab..."
-    mkdir -p /workspace && \
+    mkdir -p "$WORKSPACE_DIR" && \
     cd / && \
-    nohup jupyter lab --allow-root --no-browser --port=8888 --ip=* --NotebookApp.token='' --NotebookApp.password='' --FileContentsManager.delete_to_trash=False --ServerApp.terminado_settings='{"shell_command":["/bin/bash"]}' --ServerApp.allow_origin=* --ServerApp.preferred_dir=/workspace &> /jupyter.log &
+    nohup jupyter lab --allow-root --no-browser --port=8888 --ip=* --NotebookApp.token='' --NotebookApp.password='' --FileContentsManager.delete_to_trash=False --ServerApp.terminado_settings='{"shell_command":["/bin/bash"]}' --ServerApp.allow_origin=* --ServerApp.preferred_dir="$WORKSPACE_DIR" &> /jupyter.log &
     echo "Jupyter Lab started without a password"
 }
 
 # Call Python handler if mode is serverless or both
 call_python_handler() {
     echo "Calling Python handler.py..."
-    python /app/handler.py
+    python $WORKSPACE_DIR/handler.py
 }
 
 # ---------------------------------------------------------------------------- #
@@ -73,13 +72,11 @@ echo "Pod Started"
 
 setup_ssh
 
-# Check MODE_TO_RUN and call functions accordingly
 case $MODE_TO_RUN in
     serverless)
         call_python_handler
         ;;
     pod)
-        # Pod mode implies only starting services without calling handler.py
         start_jupyter
         ;;
     *)
@@ -90,6 +87,6 @@ esac
 
 export_env_vars
 
-echo "Start script(s) finished, pod is ready to use."
+echo "Start script(s) finished"
 
 sleep infinity
