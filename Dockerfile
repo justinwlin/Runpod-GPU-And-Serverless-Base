@@ -55,5 +55,5 @@ RUN chmod +x start.sh
 RUN ls -la $WORKSPACE_DIR/start.sh
 
 # depot build -t justinrunpod/pod-server-base:1.0 . --push --platform linux/amd64
-CMD ["$WORKSPACE_DIR/start.sh"]
+CMD $WORKSPACE_DIR/start.sh
 
