@@ -42,7 +42,7 @@ I recommend to first spin up a GPU Pod / a CPU pod using the base runpod templat
 ### Example Build Command
 
 ```bash
-docker build -t docker.io/justinrunpod/pod-server-base:1.0 .
+docker build -t justinrunpod/pod-server-base:1.0 . --push --platform linux/amd64
 ```
 
 
