@@ -25,5 +25,5 @@ if mode_to_run == "pod":
 else: 
     runpod.serverless.start({
         "handler": handler,
-        "concurrency_modifier": 1,
+        "concurrency_modifier": lambda current: 1,
     })
