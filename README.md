@@ -1,6 +1,6 @@
 # Runpod GPU Pod / Serverless LLM Basis
 
-[Docker Starter Container]([https://hub.docker.com/repository/docker/justinrunpod/pod-server-base/general](https://hub.docker.com/repository/docker/justinrunpod/pod-server-base/tags/1.0/sha256-6f14a81e9737443b70333cb250b562a9ad811a666d29c7710d38bfae3f22c20e))
+[Docker Starter Container]([https://hub.docker.com/repository/docker/justinrunpod/pod-server-base/general](https://hub.docker.com/repository/docker/justinrunpod/pod-server-base/tags/1.0/sha256-6f14a81e9737443b70333cb250b562a9ad811a666d29c7710d38bfae3f22c20e)
 
 [RunPod template](https://runpod.io/console/deploy?template=kkfdqs5wv3&ref=p1oqnqy1)
 
